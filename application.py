@@ -8,6 +8,7 @@ from models.loggedout_token import LoggedoutToken
 import pymysql
 
 from routes.route_user import *
+from routes.route_list import *
 
 app = Flask(__name__)
 
@@ -39,6 +40,10 @@ def post_api_user():
 @app.route('/api/user', methods=['PATCH'])
 def patch_api_user():
 	return patch_route_user()
+
+@app.route('/api/list/all', methods=['GET'])
+def get_api_list_all():
+	return get_route_list_all()
 
 if __name__ == '__main__':
 	app.run()
