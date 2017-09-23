@@ -31,9 +31,9 @@ def hello_world():
 def put_api_user():
 	return put_route_user()
 
-@app.route('/api/user', methods=['GET'])
-def get_api_user():
-	return get_route_user()
+@app.route('/api/user', methods=['POST'])
+def post_api_user():
+	return post_route_user()
 
 if __name__ == '__main__':
 	app.run()
