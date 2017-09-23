@@ -12,7 +12,8 @@ class Item(BaseModel):
 	def to_dict_with_public_data(self):
 		return {
 			'text': self.text,
-			'isChecked': self.is_checked
+			'isChecked': self.is_checked,
+			'id': self.id
 		}
 
 

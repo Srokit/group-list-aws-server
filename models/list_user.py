@@ -10,11 +10,11 @@ class ListUser(BaseModel):
 	user = ForeignKeyField(User)
 	list = ForeignKeyField(List)
 
-def fetch_lists_for_phone_num(phone_num):
+def fetch_lists_for_phone_num(user_id):
 
-	user = User.select().where(User.phone_num == phone_num).first()
+	user = User.select().where(User.id == user_id).first()
 	if user is None:
-		return False, None, 'User with phone number %s does not exist' % phone_num
+		return False, None, 'User with user_id %s does not exist' % user_id
 
 	list_users = ListUser.select() \
 		.join(User) \

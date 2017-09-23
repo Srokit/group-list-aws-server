@@ -9,7 +9,8 @@ class List(BaseModel):
 	def to_dict_with_public_data(self):
 		return {
 			'name': self.name,
-			'item': self.items
+			'item': self.items,
+			'id': self.id
 		}
 
 	def attach_items_as_dicts(self, items):

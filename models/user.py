@@ -12,7 +12,8 @@ class User(BaseModel):
 	def to_dict_with_public_data(self):
 		return {
 			'phoneNum': self.phone_num,
-			'name': self.name
+			'name': self.name,
+			'id': self.id
 		}
 
 

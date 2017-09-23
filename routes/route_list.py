@@ -7,9 +7,9 @@ def get_route_list_all():
     if not g.has_jwt_token:
         return jsonify({'success': False, 'errMsg': 'Forbidden'})
 
-    phone_num = g.user.get('phoneNum')
+    user_id = g.user.get('id')
 
-    succeed, lists, err_msg = fetch_lists_for_phone_num(phone_num)
+    succeed, lists, err_msg = fetch_lists_for_phone_num(user_id)
 
     if not succeed:
         return jsonify({'success': False, 'errMsg': err_msg})
@@ -19,7 +19,7 @@ def get_route_list_all():
 
         _list.attach_items_as_dicts(items)
 
-    lists_to_return = [ {'name': _list.name, 'items': _list.items} for _list in lists ]
+    lists_to_return = [ _list.to_dict_with_public_data() for _list in lists ]
 
     if succeed:
         return jsonify({'success': True, 'lists': lists_to_return})
