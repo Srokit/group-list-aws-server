@@ -4,6 +4,7 @@ from models.user import *
 from models.loggedout_token import *
 import jwt
 import config
+import datetime
 
 # PUT /api/user/
 # Request that is made on user signup
@@ -47,7 +48,7 @@ def post_route_user():
 
 	if success:
 
-		jwt_token = jwt.encode(user_public_data, config.JWT_SEC, algorithm='HS256').decode('utf-8')
+		jwt_token = jwt.encode({'user': user_public_data, 'iat': datetime.datetime.now()}, config.JWT_SEC, algorithm='HS256').decode('utf-8')
 		return jsonify({'success': True, 'jwt': jwt_token})
 
 	else:
