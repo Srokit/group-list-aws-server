@@ -10,10 +10,13 @@ from routes.route_user import *
 
 app = Flask(__name__)
 
-@app.before_request
-def _db_connect():
+def setup_db():
 	db.connect()
 	db.create_tables([User, List, Item, ListUser], safe=True)
+
+@app.before_request
+def _db_connect():
+	setup_db()
 
 @app.teardown_request
 def _db_close(exc):
@@ -24,10 +27,13 @@ def _db_close(exc):
 def hello_world():
 	return 'Hello world'
 
-@app.route('/api/user', methods=['POST'])
-def post_api_user():
-	return post_route_user()
+@app.route('/api/user', methods=['PUT'])
+def put_api_user():
+	return put_route_user()
+
+@app.route('/api/user', methods=['GET'])
+def get_api_user():
+	return get_route_user()
 
 if __name__ == '__main__':
-
 	app.run()

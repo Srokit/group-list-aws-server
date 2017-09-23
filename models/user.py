@@ -9,6 +9,12 @@ class User(BaseModel):
 	name = CharField(max_length=50)
 	password_hashed = CharField(max_length=100)
 
+	def to_dict_with_public_data(self):
+		return {
+			'phoneNum': self.phone_num,
+			'name': self.name
+		}
+
 def make_user(phone_num, name, password):
 
 	password_hashed = generate_password_hash(password)
@@ -23,3 +29,13 @@ def make_user(phone_num, name, password):
 		return False, 'Cannot create duplicate user with phone number: %s' % phone_num
 
 	return True, None
+
+def fetch_user_by_phone_num(phone_num):
+
+	user = User.select().where(User.phone_num == phone_num).limit(1).first()
+
+	if user is None:
+		return None
+
+	return user.to_dict_with_public_data()
+
