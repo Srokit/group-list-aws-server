@@ -4,6 +4,7 @@ from .list import List
 
 from .base_model import BaseModel
 
+
 class ListUser(BaseModel):
 
 	user = ForeignKeyField(User)
