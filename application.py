@@ -28,9 +28,10 @@ def post_api_user():
 	return post_route_user()
 
 def setup_db():
-	db.connect()
+	print(len(db.get_tables()))
+	print(type(db.get_tables()))
 	db.create_tables([User, List, Item, ListUser], safe=True)
-	db.close()
+	print(db.get_tables())
 
 if __name__ == '__main__':
 
