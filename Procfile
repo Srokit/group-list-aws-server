@@ -1,2 +1,1 @@
-web: python fill_dummy_data.py
-web: gunicorn application:app
+web: python fill_dummy_data.py && gunicorn application:app
