@@ -1,4 +1,3 @@
-from .jwt_authenticator import jwt_authenticator
 from flask import g, jsonify
 from models.list_user import *
 from models.item import *
