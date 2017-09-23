@@ -33,7 +33,7 @@ def put_route_user():
 
 def post_route_user():
 
-	phone_num = request.form.get('phone_num')
+	phone_num = request.form.get('phoneNum')
 	password = request.form.get('password')
 
 	if phone_num is None:
