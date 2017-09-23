@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 def setup_db():
 	db.connect()
-	db.create_tables([User, List, Item, ListUser, LoggedoutToken, safe=True)
+	db.create_tables([User, List, Item, ListUser, LoggedoutToken], safe=True)
 
 @app.before_request
 def _db_connect():
@@ -35,6 +35,10 @@ def put_api_user():
 @app.route('/api/user', methods=['POST'])
 def post_api_user():
 	return post_route_user()
+
+@app.route('/api/user', methods=['PATCH'])
+def patch_api_user():
+	return patch_route_user()
 
 if __name__ == '__main__':
 	app.run()

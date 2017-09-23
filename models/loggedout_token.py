@@ -1,14 +1,14 @@
-from base_model import BaseModel
-
+from .base_model import BaseModel
+from peewee import *
 
 class LoggedoutToken(BaseModel):
 
-    token = CharField(max_length=100, unique=True)
+    token = CharField(max_length=200, unique=True)
 
 
 def make_loggedout_token_if_new(token):
 
-    if LoggedoutToken.get(LoggedoutToken.token == token) is not None:
+    if LoggedoutToken.select().where(LoggedoutToken.token == token).first() is not None:
         # It is okay to have a duplicate just means we will ignore adding it
         return True, None
 
