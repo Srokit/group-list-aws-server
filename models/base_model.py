@@ -1,8 +1,8 @@
 from peewee import *
 import config
+from playhouse.db_url import connect
 
-db = MySQLDatabase('grouplistdatabase', host=config.SQL_HOST, port=config.SQL_PORT,
-								   user=config.SQL_USER, password=config.SQL_PASSWORD)
+db = connect(config.SQL_DBURL)
 
 class BaseModel(Model):
 
