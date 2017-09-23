@@ -15,3 +15,4 @@ SQL_PASSWORD = os.environ.get('SQL_PASSWORD')
 # On prod server this var will be set but not on local
 if SQL_DBURL is None:
 	SQL_DBURL = 'mysql://%s:%s@%s/%s' % (SQL_USER, SQL_PASSWORD, SQL_HOST, SQL_DBNAME)
+print("Config.SQL_DBURL:", SQL_DBURL)
