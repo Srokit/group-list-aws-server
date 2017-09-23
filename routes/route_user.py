@@ -60,7 +60,7 @@ def post_route_user():
 
 def patch_route_user():
 
-	jwt_token = request.headers.get('jwt')
+	jwt_token = request.args.get('jwt')
 
 	success, err_msg = make_loggedout_token_if_new(jwt_token)
 
