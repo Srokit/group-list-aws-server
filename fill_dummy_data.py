@@ -16,6 +16,10 @@ def fill_dummy_lists():
         print('Adding List:', dumb_list)
         List.create(name=dumb_list.get('name'))
 
+    lists = List.select().where(True)
+    for _list in lists:
+        print('List from table:', _list.id)
+
 def fill_dummy_items():
     for dumb_item in dummy_items:
         print('Adding Item:', dumb_item)
