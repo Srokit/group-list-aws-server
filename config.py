@@ -16,3 +16,6 @@ SQL_PASSWORD = os.environ.get('SQL_PASSWORD')
 if SQL_DBURL is None:
 	SQL_DBURL = 'mysql://%s:%s@%s/%s' % (SQL_USER, SQL_PASSWORD, SQL_HOST, SQL_DBNAME)
 print("Config.SQL_DBURL:", SQL_DBURL)
+
+# For JWT
+JWT_SEC = os.environ.get('JWT_SEC')

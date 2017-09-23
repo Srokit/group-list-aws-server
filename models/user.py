@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 class User(BaseModel):
 
 	# Identifier
-	phone_num = CharField(max_length=13)
+	phone_num = CharField(max_length=13, unique=True)
 	name = CharField(max_length=50)
 	password_hashed = CharField(max_length=100)
 
@@ -20,14 +20,19 @@ def make_user(phone_num, name, password):
 
 	password_hashed = generate_password_hash(password)
 
-	user, created = User.get_or_create(
+	user = User.get(User.phone_num == phone_num)
+
+	if user is not None:
+		return False, 'Cannot create duplicate user with phone number: %s' % phone_num
+
+	user = User.create(
 		phone_num=phone_num,
 		name=name,
 		password_hashed=password_hashed
 	)
 
-	if not created:
-		return False, 'Cannot create duplicate user with phone number: %s' % phone_num
+	if user is None:
+		return False, 'Cannot create user with phone number: %s' % phone_num
 
 	return True, None
 
