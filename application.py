@@ -13,6 +13,7 @@ app = Flask(__name__)
 @app.before_request
 def _db_connect():
 	db.connect()
+	db.create_tables([User, List, Item, ListUser], safe=True)
 
 @app.teardown_request
 def _db_close(exc):
@@ -27,13 +28,6 @@ def hello_world():
 def post_api_user():
 	return post_route_user()
 
-def setup_db():
-	print(len(db.get_tables()))
-	print(type(db.get_tables()))
-	db.create_tables([User, List, Item, ListUser], safe=True)
-	print(db.get_tables())
-
 if __name__ == '__main__':
 
-	setup_db()
 	app.run()
