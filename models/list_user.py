@@ -12,8 +12,6 @@ class ListUser(BaseModel):
 
 def fetch_lists_for_phone_num(phone_num):
 
-	print(phone_num)
-
 	user = User.select().where(User.phone_num == phone_num).first()
 	if user is None:
 		return False, None, 'User with phone number %s does not exist' % phone_num
