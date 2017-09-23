@@ -6,8 +6,7 @@ def parse_primary_key(dummy_arr, key, val):
     for i, dumb_ele in enumerate(dummy_arr):
         if dumb_ele.get(key) is not None and dumb_ele.get(key) == val:
             return i + 1
-    # return None
-    return 1 # Bit of a hack for now
+    raise Exception('No matching %s:%s on dummy_array' % (key, val))
 
 dummy_users = [
     {
@@ -118,19 +117,19 @@ dummy_list_users = [
         'user': parse_primary_key(dummy_users, 'name', 'Shaef Daddy')
     },
     {
-        'list': parse_primary_key(dummy_lists, 'name', 'Vocab quiz words and definitions'),
+        'list': parse_primary_key(dummy_lists, 'name', 'Grocery Supplies'),
         'user': parse_primary_key(dummy_users, 'name', 'Johnathan Shiii')
     },
     {
         'list': parse_primary_key(dummy_lists, 'name', 'Todo List'),
-        'user': parse_primary_key(dummy_users, 'name', 'Joh Doe')
+        'user': parse_primary_key(dummy_users, 'name', 'John Doe')
     },
     {
         'list': parse_primary_key(dummy_lists, 'name', 'Todo List'),
         'user': parse_primary_key(dummy_users, 'name', 'Stanley Yelnats')
     },
     {
-        'list': parse_primary_key(dummy_lists, 'name', 'Vocab quiz words and definitions'),
+        'list': parse_primary_key(dummy_lists, 'name', 'Bands we still need to see'),
         'user': parse_primary_key(dummy_users, 'name', 'Johnathan Shiii')
     },
     {
