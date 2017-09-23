@@ -29,7 +29,7 @@ def post_api_user():
 
 def setup_db():
 	db.connect()
-	db.create_all().commit()
+	db.create_tables([User, List, Item, ListUser], safe=True)
 	db.close()
 
 if __name__ == '__main__':
