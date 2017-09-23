@@ -60,7 +60,8 @@ def post_route_user():
 
 def patch_route_user():
 
-	jwt_token = request.args.get('jwt')
+	if not g.has_jwt_token:
+		return jsonify({'success': False, 'errMsg': 'Forbidden'})
 
 	success, err_msg = make_loggedout_token_if_new(jwt_token)
 

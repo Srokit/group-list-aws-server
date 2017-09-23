@@ -9,6 +9,7 @@ import pymysql
 
 from routes.route_user import *
 from routes.route_list import *
+from helpers import *
 
 app = Flask(__name__)
 
