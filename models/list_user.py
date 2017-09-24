@@ -73,3 +73,10 @@ def make_user_with_id_apart_of_list_with_id(user_id, list_id):
 	ListUser.create(user=user_id, list=list_id)
 
 	return True, None
+
+
+def delete_list_user_with_list_id(list_id):
+
+	ListUser.delete() \
+		.where(ListUser.list == list_id) \
+		.execute()

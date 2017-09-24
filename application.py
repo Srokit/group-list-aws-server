@@ -29,6 +29,10 @@ def _db_connect():
 		g.has_jwt_token = auth_by_token(jwt_token)
 	else:
 		g.has_jwt_token = False
+	g.jwt_token = jwt_token
+	# Can access this dict for all json posts now no matter if
+	# form encoded or nah
+	g.body = get_request_body_data(request)
 
 
 @app.teardown_request
@@ -60,6 +64,13 @@ def get_api_list_all():
 def put_api_list():
 	return put_route_list()
 
+@app.route('/api/list', methods=['DELETE'])
+def delete_api_list():
+	return delete_route_list()
+
+@app.route('/api/list', methods=['PATCH'])
+def patch_api_list():
+	return patch_route_list()
 
 @app.route('/api/items', methods=['PUT'])
 def put_api_items():

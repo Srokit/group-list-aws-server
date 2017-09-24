@@ -1,5 +1,5 @@
 
-from flask import request, jsonify
+from flask import request, jsonify, g
 from models.user import *
 from models.loggedout_token import *
 import jwt
@@ -18,7 +18,7 @@ import datetime
 
 def put_route_user():
 
-	post_body = request.form
+	post_body = g.body
 	success, err_msg = make_user(post_body.get('phoneNum'), post_body.get('name'), post_body.get('password'))
 
 	if success:
@@ -38,11 +38,13 @@ def put_route_user():
 
 def post_route_user():
 
-	phone_num = request.form.get('phoneNum')
-	password = request.form.get('password')
+	phone_num = g.body.get('phoneNum')
+	password = g.body.get('password')
 
 	if phone_num is None:
 		return jsonify({'success': False, 'errMsg': 'No phone number provided'})
+
+	print("phone_num=%s and password=%s" % (phone_num, password))
 
 	success, user_public_data, err_msg = fetch_user_by_credentials(phone_num, password)
 
@@ -62,6 +64,8 @@ def patch_route_user():
 
 	if not g.has_jwt_token:
 		return jsonify({'success': False, 'errMsg': 'Forbidden'})
+
+	jwt_token = g.jwt_token
 
 	success, err_msg = make_loggedout_token_if_new(jwt_token)
 

@@ -18,3 +18,10 @@ def make_loggedout_token_if_new(token):
         return True, None
 
     return False, 'Could not add logged out token %s to list' % token
+
+def is_token_in_loggedout_tokens(token):
+
+    if LoggedoutToken.select().where(LoggedoutToken.token == token).first() is None:
+        return False
+
+    return True

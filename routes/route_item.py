@@ -19,7 +19,7 @@ def put_route_items():
 
     user_id = g.user.get('id')
 
-    put_data = json.loads(request.data)
+    put_data = g.body
 
     items = put_data['items']
     list_id = put_data['listId']
@@ -45,8 +45,7 @@ def delete_route_item():
     item_id = int(request.args.get('itemId'))
 
     item = fetch_item_with_id(item_id)
-    list_id = item.list
-
+    list_id = item.list.id
     success, err_msg = is_user_with_id_part_of_list_with_id(user_id, list_id)
 
     if not success:

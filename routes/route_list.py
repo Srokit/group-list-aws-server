@@ -35,7 +35,7 @@ def put_route_list():
     if not g.has_jwt_token:
         return jsonify({'success': False, 'errMsg': 'Forbidden'})
 
-    put_data = json.loads(request.data)
+    put_data = g.body
 
     _list = { 'name': put_data['name'] }
     items = put_data['items']
@@ -53,5 +53,50 @@ def put_route_list():
 
     if not success:
         return jsonify({'success': False, 'errMsg': err_msg})
+
+    return jsonify({'success': True})
+
+
+def delete_route_list():
+
+    if not g.has_jwt_token:
+        return jsonify({'success': False, 'errMsg': 'Forbidden'})
+
+    user_id = g.user['id']
+
+    list_id = int(request.args.get('listId'))
+
+    success, err_msg = is_user_with_id_part_of_list_with_id(user_id, list_id)
+
+    if not success:
+        return jsonify({'success': False, 'errMsg': err_msg})
+
+    success, err_msg = delete_items_with_list_id(list_id)
+
+    if not success:
+        return jsonify({'success': False, 'errMsg': err_msg})
+
+    delete_list_user_with_list_id(list_id)
+
+    delete_list_with_id(list_id)
+
+    return jsonify({'success': True})
+
+
+def patch_route_list():
+
+    if not g.has_jwt_token:
+        return jsonify({'success': False, 'errMsg': 'Forbidden'})
+
+    user_id = g.user['id']
+
+    _list = g.body
+
+    success, err_msg = is_user_with_id_part_of_list_with_id(user_id, _list['id'])
+
+    if not success:
+        return jsonify({'success': False, 'errMsg': err_msg})
+
+    edit_list(_list)
 
     return jsonify({'success': True})

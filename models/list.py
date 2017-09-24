@@ -9,7 +9,7 @@ class List(BaseModel):
 	def to_dict_with_public_data(self):
 		return {
 			'name': self.name,
-			'item': self.items,
+			'items': self.items,
 			'id': self.id
 		}
 
@@ -22,3 +22,11 @@ def make_list(_list):
 	if new_list is None:
 		return False, None, 'Could not create list with name %s' % _list.get('name')
 	return True, new_list.id, None
+
+
+def delete_list_with_id(list_id):
+	List.delete().where(List.id == list_id).execute()
+
+def edit_list(_list):
+	List.update(name=_list.get('name')) \
+	    .where(List.id == _list.get('id')).execute()
