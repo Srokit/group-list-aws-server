@@ -35,10 +35,12 @@ def put_route_items():
 
     success, new_items, err_msg = make_items_with_list_id(items, list_id)
 
+    items_to_return = [new_item.to_dict_with_public_data() for new_item in new_items]
+
     if not success:
         return jsonify({'success': False, 'errMsg': err_msg})
 
-    return jsonify({'success': True, 'items': new_items})
+    return jsonify({'success': True, 'items': items_to_return})
 
 def delete_route_item():
 

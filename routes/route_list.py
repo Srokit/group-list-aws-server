@@ -49,7 +49,7 @@ def put_route_list():
 
     user_id = g.user.get('id')
 
-    success, err_msg = make_items_with_list_id(items, list_id)
+    success, new_items, err_msg = make_items_with_list_id(items, list_id)
 
     if not success:
         return jsonify({'success': False, 'errMsg': err_msg})
@@ -61,7 +61,7 @@ def put_route_list():
 
     new_list = _list
     new_list['id'] = list_id
-    new_list['items'] = []
+    new_list['items'] = [new_item.to_dict_with_public_data() for new_item in new_items]
     return jsonify({'success': True, 'list': new_list})
 
 
