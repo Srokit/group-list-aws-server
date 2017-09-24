@@ -62,7 +62,7 @@ def delete_route_list():
     if not g.has_jwt_token:
         return jsonify({'success': False, 'errMsg': 'Forbidden'})
 
-    user_id = g.user['id']
+    user_id = g.user.get('id')
 
     list_id = int(request.args.get('listId'))
 
@@ -88,7 +88,7 @@ def patch_route_list():
     if not g.has_jwt_token:
         return jsonify({'success': False, 'errMsg': 'Forbidden'})
 
-    user_id = g.user['id']
+    user_id = g.user.get('id')
 
     _list = g.body
 
