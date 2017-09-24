@@ -11,7 +11,7 @@ class ListUser(BaseModel):
 	list = ForeignKeyField(List)
 
 
-def fetch_lists_for_phone_num(user_id):
+def fetch_lists_for_user_with_id(user_id):
 
 	user = User.select().where(User.id == user_id).first()
 	if user is None:
@@ -37,11 +37,11 @@ def is_user_with_id_part_of_list_with_id(user_id, list_id):
 	if _list is None:
 		return False, 'List with list_id %d does not exist' % list_id
 
-	list_user = ListUser.select() \
+	list_user = ListUser.select(ListUser, User, List) \
 		.join(User) \
 		.switch(ListUser) \
 		.join(List) \
-		.where(ListUser.user == user_id and ListUser.list == list_id) \
+		.where((ListUser.user == user_id) & (ListUser.list == list_id)) \
 		.first()
 
 	if list_user is None:

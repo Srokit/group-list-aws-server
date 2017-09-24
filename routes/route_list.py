@@ -9,7 +9,7 @@ def get_route_list_all():
 
     user_id = g.user.get('id')
 
-    succeed, lists, err_msg = fetch_lists_for_phone_num(user_id)
+    succeed, lists, err_msg = fetch_lists_for_user_with_id(user_id)
 
     if not succeed:
         return jsonify({'success': False, 'errMsg': err_msg})
