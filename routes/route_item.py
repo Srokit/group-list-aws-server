@@ -57,3 +57,22 @@ def delete_route_item():
         return jsonify({'success': False, 'errMsg': err_msg})
 
     return jsonify({'success': True})
+
+def patch_route_item():
+
+    if not g.has_jwt_token:
+        return jsonify({'success': False, 'errMsg': 'Forbidden'})
+
+    user_id = g.user.get('id')
+    item_dict = g.body
+
+    item = fetch_item_with_id(int(item_dict.get('id')))
+    list_id = item.list.id
+    success, err_msg = is_user_with_id_part_of_list_with_id(user_id, list_id)
+
+    if not success:
+        return jsonify({'success': False, 'errMsg': err_msg})
+
+    edit_item(item_dict)
+
+    return jsonify({'success': True})

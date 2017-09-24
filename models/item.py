@@ -55,3 +55,9 @@ def delete_items_with_list_id(list_id):
 	if Item.select().where(Item.list == list_id).first() is not None:
 		return False, 'All items under list with id %d were not deleted' % list_id
 	return True, None
+
+
+def edit_item(item):
+
+	Item.update(text=item.get('text'), is_checked=item.get('isChecked')) \
+		.where(Item.id == item.get('id')).execute()

@@ -80,6 +80,10 @@ def put_api_items():
 def delete_api_item():
 	return delete_route_item()
 
+@app.route('/api/item', methods=['PATCH'])
+def patch_api_item():
+	return patch_route_item()
+
 
 if __name__ == '__main__':
 	app.run()
