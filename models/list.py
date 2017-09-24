@@ -10,11 +10,15 @@ class List(BaseModel):
 		return {
 			'name': self.name,
 			'items': self.items,
+			'users': self.users,
 			'id': self.id
 		}
 
 	def attach_items_as_dicts(self, items):
 		self.items = [ item.to_dict_with_public_data() for item in items]
+
+	def attach_users_as_dicts(self, users, ignore_user_id):
+		self.users = [ user.to_dict_with_public_data() for user in users if user.id != ignore_user_id ]
 
 
 def make_list(_list):

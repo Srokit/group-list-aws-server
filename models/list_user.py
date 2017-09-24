@@ -80,3 +80,15 @@ def delete_list_user_with_list_id(list_id):
 	ListUser.delete() \
 		.where(ListUser.list == list_id) \
 		.execute()
+
+
+def get_users_apart_of_list_with_id(list_id):
+
+	list_users = ListUser.select() \
+		.join(User) \
+		.switch(ListUser) \
+		.join(List) \
+		.where(ListUser.list == list_id)
+	users = [ list_user.user for list_user in list_users ]
+
+	return users

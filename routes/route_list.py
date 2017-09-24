@@ -18,8 +18,10 @@ def get_route_list_all():
 
     for _list in lists:
         items = fetch_items_for_list_with_id(_list.id)
+        users = get_users_apart_of_list_with_id(_list.id)
 
         _list.attach_items_as_dicts(items)
+        _list.attach_users_as_dicts(users, user_id)
 
     lists_to_return = [ _list.to_dict_with_public_data() for _list in lists ]
 

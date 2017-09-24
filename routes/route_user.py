@@ -2,6 +2,7 @@
 from flask import request, jsonify, g
 from models.user import *
 from models.loggedout_token import *
+from models.list_user import *
 import jwt
 import config
 import datetime
