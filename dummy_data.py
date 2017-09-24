@@ -38,19 +38,24 @@ dummy_users = [
 
 dummy_lists = [
     {
-        'name': 'Todo List'
+        'name': 'Todo List',
+        'creator': 'Shaef Daddy'
     },
     {
-        'name': 'Grocery Supplies'
+        'name': 'Grocery Supplies',
+        'creator': 'Johnathan Shiii'
     },
     {
-        'name': 'Bands we still need to see'
+        'name': 'Bands we still need to see',
+        'creator': 'Neilander Sehkon'
     },
     {
-        'name': 'Vocab quiz words and definitions'
+        'name': 'Vocab quiz words and definitions',
+        'creator': 'Johnathan Shiii'
     },
     {
-        'name': 'My best friendz'
+        'name': 'My best friendz',
+        'creator': 'John Doe'
     }
 ]
 
@@ -109,7 +114,7 @@ dummy_items = [
 
 dummy_list_users = [
     {
-        'list': parse_primary_key(dummy_lists, 'name', 'Todo List'),
+        'list': parse_primary_key(dummy_lists, 'name', 'Vocab quiz words and definitions'),
         'user': parse_primary_key(dummy_users, 'name', 'Johnathan Shiii')
     },
     {
@@ -121,7 +126,7 @@ dummy_list_users = [
         'user': parse_primary_key(dummy_users, 'name', 'Johnathan Shiii')
     },
     {
-        'list': parse_primary_key(dummy_lists, 'name', 'Todo List'),
+        'list': parse_primary_key(dummy_lists, 'name', 'My best friendz'),
         'user': parse_primary_key(dummy_users, 'name', 'John Doe')
     },
     {

@@ -38,8 +38,11 @@ def put_route_list():
         return jsonify({'success': False, 'errMsg': 'Forbidden'})
 
     put_data = g.body
+    user_name = g.user.get('name')
 
-    _list = { 'name': put_data['name'] }
+    _list = { 'name': put_data['name'],
+        'creator': user_name
+    }
     items = put_data['items']
 
     success, list_id, err_msg = make_list(_list)

@@ -14,7 +14,7 @@ def fill_dummy_users():
 def fill_dummy_lists():
     for dumb_list in dummy_lists:
         print('Adding List:', dumb_list)
-        List.create(name=dumb_list.get('name')).save()
+        List.create(name=dumb_list.get('name'), creator=dumb_list.get('creator')).save()
 
     lists = List.select().where(True)
     for _list in lists:
