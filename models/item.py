@@ -17,7 +17,7 @@ class Item(BaseModel):
 		}
 
 
-def fetch_items_for_list_with_id(items, list_id):
+def fetch_items_for_list_with_id(list_id):
 	return Item.select().where(Item.list == list_id)
 
 def make_items_with_list_id(items, list_id):
@@ -34,6 +34,6 @@ def make_items_with_list_id(items, list_id):
 		item_pos += 1
 
 	if one_not_created:
-		return jsonify({'success': False, 'errMsg': err_msg.strip(', ')})
+		return False, err_msg.strip(', ')
 
-	return jsonify({'success': True})
+	return True, None
