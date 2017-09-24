@@ -63,51 +63,61 @@ dummy_items = [
     {
         'text': 'Wash dishes',
         'is_checked': False,
+        'creator': 'Johnny Park',
         'list': parse_primary_key(dummy_lists, 'name', 'Todo List')
     },
     {
         'text': 'Do laundry',
         'is_checked': True,
+        'creator': 'Johnny Park',
         'list': parse_primary_key(dummy_lists, 'name', 'Todo List')
     },
     {
         'text': 'Solve a rubiks cube',
         'is_checked': False,
+        'creator': 'Johnny Park',
         'list': parse_primary_key(dummy_lists, 'name', 'Todo List')
     },
     {
         'text': 'Eggs',
         'is_checked': False,
+        'creator': 'Johnny Park',
         'list': parse_primary_key(dummy_lists, 'name', 'Grocery Supplies')
     },
     {
         'text': 'Bacon',
         'is_checked': False,
+        'creator': 'Johnny Park',
         'list': parse_primary_key(dummy_lists, 'name', 'Grocery Supplies')
     },
     {
         'text': 'Blink-182',
         'is_checked': False,
+        'creator': 'Johnny Park',
         'list': parse_primary_key(dummy_lists, 'name', 'Bands we still need to see')
     },
     {
         'text': 'Rae Sremmurd',
         'is_checked': True,
+        'creator': 'Johnny Park',
         'list': parse_primary_key(dummy_lists, 'name', 'Bands we still need to see')
     },
     {
         'text': 'J Beibs',
         'is_checked': True,
+        'creator': 'Johnny Park',
         'list': parse_primary_key(dummy_lists, 'name', 'Bands we still need to see')
     },
     {
         'text': 'Leviosa',
         'is_checked': False,
+        'creator': 'Johnny Park',
         'list': parse_primary_key(dummy_lists, 'name', 'Vocab quiz words and definitions')
     },
     {
         'text': 'Neilander baby',
         'is_checked': True,
+        'creator': 'Johnny Park',
         'list': parse_primary_key(dummy_lists, 'name', 'My best friendz')
     }
 ]

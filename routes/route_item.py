@@ -18,10 +18,14 @@ def put_route_items():
         return jsonify({'success': False, 'errMsg': 'Forbidden'})
 
     user_id = g.user.get('id')
+    user_name = g.user.get('name')
 
     put_data = g.body
 
     items = put_data['items']
+
+    items = [ {'text': item.get('text'), 'creator': user_name} for item in items ]
+
     list_id = put_data['listId']
 
     success, err_msg = is_user_with_id_part_of_list_with_id(user_id, list_id)

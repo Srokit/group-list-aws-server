@@ -23,7 +23,8 @@ def fill_dummy_lists():
 def fill_dummy_items():
     for dumb_item in dummy_items:
         print('Adding Item:', dumb_item)
-        Item.create(text=dumb_item.get('text'), is_checked=dumb_item.get('is_checked'), list_id=dumb_item.get('list'))
+        Item.create(text=dumb_item.get('text'), is_checked=dumb_item.get('is_checked'),
+                   list_id=dumb_item.get('list'), creator=dumb_item.get('creator'))
 
 def fill_dummy_list_users():
     for dumb_list_user in dummy_list_users:

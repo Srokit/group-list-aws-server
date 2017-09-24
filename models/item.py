@@ -8,12 +8,14 @@ class Item(BaseModel):
 	text = CharField(max_length=500)
 	is_checked = BooleanField(default=False)
 	list = ForeignKeyField(List)
+	creator = CharField(max_length=100)
 
 	def to_dict_with_public_data(self):
 		return {
 			'text': self.text,
 			'isChecked': self.is_checked,
-			'id': self.id
+			'id': self.id,
+			'creator': self.creator
 		}
 
 
@@ -30,7 +32,7 @@ def make_items_with_list_id(items, list_id):
 	one_not_created = False
 	item_pos = 1
 	for item in items:										# Can't start checked
-		item_res = Item.create(text=item.get('text'), list=list_id, is_checked=False)
+		item_res = Item.create(text=item.get('text'), list=list_id, is_checked=False, creator=item.get('creator'))
 		if item_res is None:
 			err_msg += "%d, " % item_pos
 			one_not_created = True
