@@ -31,17 +31,20 @@ def make_items_with_list_id(items, list_id):
 
 	one_not_created = False
 	item_pos = 1
+	item_reses = []
 	for item in items:										# Can't start checked
 		item_res = Item.create(text=item.get('text'), list=list_id, is_checked=False, creator=item.get('creator'))
 		if item_res is None:
 			err_msg += "%d, " % item_pos
 			one_not_created = True
+		else:
+			item_reses.append(item_res)
 		item_pos += 1
 
 	if one_not_created:
-		return False, err_msg.strip(', ')
+		return False, None, err_msg.strip(', ')
 
-	return True, None
+	return True, item_reses, None
 
 def delete_item_with_id(item_id):
 	Item.delete().where(Item.id == item_id).execute()

@@ -33,12 +33,12 @@ def put_route_items():
     if not success:
         return jsonify({'success': False, 'errMsg': err_msg})
 
-    success, err_msg = make_items_with_list_id(items, list_id)
+    success, new_items, err_msg = make_items_with_list_id(items, list_id)
 
     if not success:
         return jsonify({'success': False, 'errMsg': err_msg})
 
-    return jsonify({'success': True})
+    return jsonify({'success': True, 'items': new_items})
 
 def delete_route_item():
 
