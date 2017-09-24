@@ -56,6 +56,10 @@ def patch_api_user():
 def get_api_list_all():
 	return get_route_list_all()
 
+@app.route('/api/list', methods=['PUT'])
+def put_api_list():
+	return put_route_list()
+
 
 @app.route('/api/items', methods=['PUT'])
 def put_api_items():
