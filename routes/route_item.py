@@ -14,6 +14,9 @@ from models.list_user import *
 
 def put_route_items():
 
+    if not g.has_jwt_token:
+        return jsonify({'success': False, 'errMsg': 'Forbidden'})
+
     user_id = g.user.get('id')
 
     put_data = json.loads(request.data)
@@ -29,6 +32,29 @@ def put_route_items():
     success, err_msg = make_items_with_list_id(items, list_id)
 
     if not success:
+        return jsonify({'success': False, 'errMsg': err_msg})
+
+    return jsonify({'success': True})
+
+def delete_route_item():
+
+    if not g.has_jwt_token:
+        return jsonify({'success': False, 'errMsg': 'Forbidden'})
+
+    user_id = g.user.get('id')
+    item_id = int(request.args.get('itemId'))
+
+    item = fetch_item_with_id(item_id)
+    list_id = item.list
+
+    success, err_msg = is_user_with_id_part_of_list_with_id(user_id, list_id)
+
+    if not success:
+        return jsonify({'success': False, 'errMsg': err_msg})
+
+    succeed, err_msg = delete_item_with_id(item_id)
+
+    if not succeed:
         return jsonify({'success': False, 'errMsg': err_msg})
 
     return jsonify({'success': True})

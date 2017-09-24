@@ -65,6 +65,10 @@ def put_api_list():
 def put_api_items():
 	return put_route_items()
 
+@app.route('/api/item', methods=['DELETE'])
+def delete_api_item():
+	return delete_route_item()
+
 
 if __name__ == '__main__':
 	app.run()
