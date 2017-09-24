@@ -59,7 +59,10 @@ def put_route_list():
     if not success:
         return jsonify({'success': False, 'errMsg': err_msg})
 
-    return jsonify({'success': True})
+    new_list = _list
+    new_list['id'] = list_id
+    new_list['items'] = []
+    return jsonify({'success': True, 'list': new_list})
 
 
 def delete_route_list():
