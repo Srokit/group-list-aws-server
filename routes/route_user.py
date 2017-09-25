@@ -68,9 +68,8 @@ def patch_route_user():
 
 	jwt_token = g.jwt_token
 
-	success, err_msg = make_loggedout_token_if_new(jwt_token)
+	make_loggedout_token_if_new(jwt_token)
+	
+	return jsonify({'success': True})
 
-	if success:
-		return jsonify({'success': True})
-	else:
-		return jsonify({'success': False, 'errMsg': err_msg})
+

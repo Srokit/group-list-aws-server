@@ -21,7 +21,7 @@ def make_user(phone_num, name, password):
 
 	password_hashed = generate_password_hash(password)
 
-	user = User.select().where(User.phone_num == phone_num).first()
+	user = User.get(User.phone_num == phone_num)
 
 	if user is not None:
 		return False, 'Cannot create duplicate user with phone number: %s' % phone_num

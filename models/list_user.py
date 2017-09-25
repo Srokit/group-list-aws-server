@@ -40,7 +40,7 @@ def is_user_with_id_part_of_list_with_id(user_id, list_id):
 		.join(User)
 		.switch(ListUser)
 		.join(List)
-		.where((ListUser.user == user_id) & (ListUser.list == list_id))
+		.where(ListUser.user == user_id, ListUser.list == list_id)
 		.first()
 	)
 

@@ -35,6 +35,6 @@ def make_list(_list):
 def delete_list_with_id(list_id):
 	List.delete().where(List.id == list_id).execute()
 
-def edit_list(_list):
-	List.update(name=_list.get('name')) \
-	    .where(List.id == _list.get('id')).execute()
+
+def edit_list(list):
+	List.update(name=list.get('name')).where(List.id == list.get('id')).execute()
