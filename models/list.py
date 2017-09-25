@@ -5,6 +5,8 @@ from .base_model import BaseModel
 class List(BaseModel):
 
 	name = CharField(max_length=150)
+	
+	# todo: make FK
 	creator = CharField(max_length=100) #I know this should be a FK everntually
 
 	def to_dict_with_public_data(self):

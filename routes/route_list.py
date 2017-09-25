@@ -16,12 +16,13 @@ def get_route_list_all():
     if not succeed:
         return jsonify({'success': False, 'errMsg': err_msg})
 
-    for _list in lists:
-        items = fetch_items_for_list_with_id(_list.id)
-        users = get_users_apart_of_list_with_id(_list.id)
+    for list in lists:
+        items = Item.get(Item.list == list.id)
+        
+        users = get_users_apart_of_list_with_id(list.id)
 
-        _list.attach_items_as_dicts(items)
-        _list.attach_users_as_dicts(users, user_id)
+        list.attach_items_as_dicts(items)
+        list.attach_users_as_dicts(users, user_id)
 
     lists_to_return = [ _list.to_dict_with_public_data() for _list in lists ]
 
@@ -40,12 +41,10 @@ def put_route_list():
     put_data = g.body
     user_name = g.user.get('name')
 
-    _list = { 'name': put_data['name'],
-        'creator': user_name
-    }
+    list = { 'name': put_data['name'], 'creator': user_name }
     items = put_data['items']
 
-    success, list_id, err_msg = make_list(_list)
+    success, list_id, err_msg = make_list(list)
 
     user_id = g.user.get('id')
 
@@ -59,7 +58,7 @@ def put_route_list():
     if not success:
         return jsonify({'success': False, 'errMsg': err_msg})
 
-    new_list = _list
+    new_list = list
     new_list['id'] = list_id
     new_list['items'] = [new_item.to_dict_with_public_data() for new_item in new_items]
     return jsonify({'success': True, 'list': new_list})
@@ -98,13 +97,13 @@ def patch_route_list():
 
     user_id = g.user.get('id')
 
-    _list = g.body
+    list = g.body
 
-    success, err_msg = is_user_with_id_part_of_list_with_id(user_id, _list['id'])
+    success, err_msg = is_user_with_id_part_of_list_with_id(user_id, list['id'])
 
     if not success:
         return jsonify({'success': False, 'errMsg': err_msg})
 
-    edit_list(_list)
+    edit_list(list)
 
     return jsonify({'success': True})

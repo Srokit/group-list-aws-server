@@ -7,8 +7,10 @@ class Item(BaseModel):
 
 	text = CharField(max_length=500)
 	is_checked = BooleanField(default=False)
-	list = ForeignKeyField(List)
+	
+	# todo: should be Foreign Key Field
 	creator = CharField(max_length=100)
+	list = ForeignKeyField(List)
 
 	def to_dict_with_public_data(self):
 		return {
@@ -17,13 +19,6 @@ class Item(BaseModel):
 			'id': self.id,
 			'creator': self.creator
 		}
-
-
-def fetch_items_for_list_with_id(list_id):
-	return Item.select().where(Item.list == list_id)
-
-def fetch_item_with_id(item_id):
-	return Item.select().where(Item.id == item_id).first()
 
 def make_items_with_list_id(items, list_id):
 
@@ -48,10 +43,7 @@ def make_items_with_list_id(items, list_id):
 
 def delete_item_with_id(item_id):
 	Item.delete().where(Item.id == item_id).execute()
-
-	if Item.select().where(Item.id == item_id).first() is not None:
-		return False, 'Item with id %d was not deleted' % item_id
-	return True, None
+	
 
 def delete_items_with_list_id(list_id):
 

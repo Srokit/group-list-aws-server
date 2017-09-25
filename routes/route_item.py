@@ -42,6 +42,7 @@ def put_route_items():
 
     return jsonify({'success': True, 'items': items_to_return})
 
+
 def delete_route_item():
 
     if not g.has_jwt_token:
@@ -50,19 +51,16 @@ def delete_route_item():
     user_id = g.user.get('id')
     item_id = int(request.args.get('itemId'))
 
-    item = fetch_item_with_id(item_id)
-    list_id = item.list.id
-    success, err_msg = is_user_with_id_part_of_list_with_id(user_id, list_id)
+    item = Item.get(Item.id == item_id)
+    success, err_msg = is_user_with_id_part_of_list_with_id(user_id, item.list_id)
 
     if not success:
         return jsonify({'success': False, 'errMsg': err_msg})
 
-    succeed, err_msg = delete_item_with_id(item_id)
-
-    if not succeed:
-        return jsonify({'success': False, 'errMsg': err_msg})
+    delete_item_with_id(item_id)
 
     return jsonify({'success': True})
+
 
 def patch_route_item():
 
@@ -72,9 +70,10 @@ def patch_route_item():
     user_id = g.user.get('id')
     item_dict = g.body
 
-    item = fetch_item_with_id(int(item_dict.get('id')))
-    list_id = item.list.id
-    success, err_msg = is_user_with_id_part_of_list_with_id(user_id, list_id)
+    item_id = int(item_dict.get('id'))
+    item = Item.get(Item.id == item_id)
+    
+    success, err_msg = is_user_with_id_part_of_list_with_id(user_id, item.list_id)
 
     if not success:
         return jsonify({'success': False, 'errMsg': err_msg})
